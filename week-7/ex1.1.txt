@@ -1,0 +1,16 @@
+-- select all movies that belongs to the category scifi or horror and is rated "R" or "PG13"
+SELECT customer.first_name, customer.last_name, film.title
+FROM customer, film
+INNER JOIN film_category
+ON (film.film_id = film_category.film_id AND (film_category.category_id = '11' OR film_category.category_id = '14'))
+WHERE
+	(NOT EXISTS
+	(
+		-- all movies that has been rented
+	SELECT first_name, last_name, title
+	FROM customer, film, inventory
+	INNER JOIN rental
+	ON rental.inventory_id = inventory.inventory_id
+	)
+	)
+--LIMIT 500
