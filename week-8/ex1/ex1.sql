@@ -1,13 +1,12 @@
-CREATE FUNCTION get_address1()
+CREATE FUNCTION get_address1();
 returns table( address VARCHAR(45))
 as
 $$
 begin
 return query
-select address.address from address
-where
-	('11' LIKE '%' || address.address || '%') AND
-	(address.city_id BETWEEN 400 AND 600)
+SELECT address.address FROM address
+WHERE address.address LIKE '%11%'
+AND address.city_id BETWEEN 400 AND 600
 ;
 end;
 $$
